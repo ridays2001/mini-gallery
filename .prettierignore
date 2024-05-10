@@ -1,0 +1,9 @@
+node_modules
+.next
+
+_img
+
+_types
+*.d.ts
+
+manifest.webmanifest

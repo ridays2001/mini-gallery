@@ -1,0 +1,14 @@
+{
+	"typescript.tsdk": "node_modules/typescript/lib",
+
+	// Custom editor labels for Next.js
+	"workbench.editor.customLabels.enabled": true,
+	"workbench.editor.customLabels.patterns": {
+		"**/app/**/page.tsx": "${dirname} - Page",
+		"**/app/**/index.tsx": "${dirname} - Index",
+		"**/app/**/layout.tsx": "${dirname} - Layout",
+		"**/app/**/template.tsx": "${dirname} - Template",
+		"**/components/**/index.tsx": "${dirname} - Component",
+		"**/index.ts": "${dirname} - Index"
+	}
+}
