@@ -14,6 +14,7 @@ export async function getUser(required = false) {
 	const { getUser: getKindeUser } = getKindeServerSession();
 	const kindeUser = await getKindeUser();
 	if (required && !kindeUser) redirect('/api/auth/login');
+	if (!kindeUser) return null;
 
 	const prisma = getPrisma();
 	const user = await prisma.user.findUnique({ where: { id: kindeUser?.id }, include: { posts: true } });
