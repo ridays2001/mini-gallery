@@ -10,5 +10,6 @@
 		"**/app/**/template.tsx": "${dirname} - Template",
 		"**/components/**/index.tsx": "${dirname} - Component",
 		"**/index.ts": "${dirname} - Index"
-	}
+	},
+	"cSpell.words": ["kinde"]
 }
