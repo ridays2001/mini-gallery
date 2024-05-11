@@ -4,6 +4,7 @@ import { getPrisma } from '@/lib/db';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { PersonIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { CommentBox, CommentButton } from './Comments';
 import { LikeButton } from './LikeButton';
@@ -33,17 +34,19 @@ export default async function PostPage({ params: { id } }: PostPageProps) {
 				className='rounded-lg'
 			/>
 
-			<div className='flex items-center gap-4'>
-				<Avatar className='w-12 h-12'>
-					<AvatarImage src={post.author?.picture} alt='Profile Picture' />
-					<AvatarFallback>
-						<PersonIcon />
-					</AvatarFallback>
-				</Avatar>
-				<div>
-					<p className='text-lg md:text-xl font-heading'>{post.author?.name}</p>
-					<p>{post.author?.username ? `@${post.author?.username}` : 'No username set.'}</p>
-				</div>
+			<div className='flex items-center'>
+				<Link href={`/users/${post.author.username}`} passHref className='flex items-center gap-4'>
+					<Avatar className='w-12 h-12'>
+						<AvatarImage src={post.author?.picture} alt='Profile Picture' />
+						<AvatarFallback>
+							<PersonIcon />
+						</AvatarFallback>
+					</Avatar>
+					<div>
+						<p className='text-lg md:text-xl font-heading'>{post.author?.name}</p>
+						<p>{post.author?.username ? `@${post.author?.username}` : 'No username set.'}</p>
+					</div>
+				</Link>
 				<div className='ms-auto flex items-center'>
 					<LikeButton likes={post.likes} postId={post.id} />
 					<CommentButton comments={post.comments.length} isAuthenticated={isAuthenticated} />
@@ -55,12 +58,14 @@ export default async function PostPage({ params: { id } }: PostPageProps) {
 			<section className='flex flex-col gap-4 pb-4'>
 				{post.comments.map(comment => (
 					<div key={comment.id} className='flex gap-4'>
-						<Avatar className='w-12 h-12'>
-							<AvatarImage src={comment.author.picture} alt='Profile Picture' />
-							<AvatarFallback>
-								<PersonIcon />
-							</AvatarFallback>
-						</Avatar>
+						<Link href={`/users/${comment.author.username}`}>
+							<Avatar className='w-12 h-12'>
+								<AvatarImage src={comment.author.picture} alt='Profile Picture' />
+								<AvatarFallback>
+									<PersonIcon />
+								</AvatarFallback>
+							</Avatar>
+						</Link>
 						<div>
 							<p className='text-lg md:text-xl font-heading'>{comment.author.name}</p>
 							<p>{comment.content}</p>
