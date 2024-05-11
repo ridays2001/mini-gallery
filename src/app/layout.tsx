@@ -1,9 +1,10 @@
 import { Header } from '@/components/Header';
 import { Toaster } from '@/components/ui/sonner';
-import type { Metadata } from 'next';
 
 import { Montserrat, Playfair_Display } from 'next/font/google';
 import './globals.css';
+
+import type { Metadata } from 'next';
 
 const playfairDisplay = Playfair_Display({ subsets: ['latin'], variable: '--font-heading' });
 const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-body' });

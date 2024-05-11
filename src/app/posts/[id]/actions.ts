@@ -1,9 +1,10 @@
 'use server';
 
 import { getPrisma, getUser } from '@/lib/db';
-import type { ServerActionState } from '@/lib/types';
 import { generateId } from '@/lib/utils';
 import { revalidatePath } from 'next/cache';
+
+import type { ServerActionState } from '@/lib/types';
 
 export async function likeAction(postId: string) {
 	const prisma = getPrisma();

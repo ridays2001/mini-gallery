@@ -1,8 +1,9 @@
 import { Posts } from '@/components/Posts';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import type { Post, User } from '@prisma/client';
 import { PersonIcon } from '@radix-ui/react-icons';
 import { EditProfileForm } from './EditProfileForm';
+
+import type { Post, User } from '@prisma/client';
 
 export function UserProfile({ user, isSelf = false }: UserProfileProps) {
 	const posts = user.posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());

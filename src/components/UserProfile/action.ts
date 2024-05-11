@@ -1,8 +1,9 @@
 'use server';
 
 import { getPrisma, getUser } from '@/lib/db';
-import type { ServerActionState } from '@/lib/types';
 import { revalidatePath } from 'next/cache';
+
+import type { ServerActionState } from '@/lib/types';
 
 export async function setProfileAction(_prevState: ServerActionState, formData: FormData): Promise<ServerActionState> {
 	const user = await getUser();

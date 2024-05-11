@@ -1,9 +1,10 @@
-import type { ServerActionState } from '@/lib/types';
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { useEffect } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { toast } from 'sonner';
 import { Button } from './ui/button';
+
+import type { ServerActionState } from '@/lib/types';
 
 export function FormWrapper({ action, children, onSuccess, className = '' }: FormWrapperProps) {
 	const [state, formAction] = useFormState(action, {});
