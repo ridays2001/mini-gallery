@@ -69,3 +69,24 @@ h4 {
 p {
 	@apply leading-7 font-body;
 }
+
+/* Spinner. Ref: https://cssloaders.github.io/ */
+.loader {
+	width: 16px;
+	height: 16px;
+	border: 1px solid #fff;
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
