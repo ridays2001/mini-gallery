@@ -4,6 +4,7 @@ import { getPrisma } from '@/lib/db';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { PersonIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import { CommentBox, CommentButton } from './Comments';
 import { LikeButton } from './LikeButton';
 
@@ -13,6 +14,8 @@ export default async function PostPage({ params: { id } }: PostPageProps) {
 		where: { id },
 		include: { author: true, comments: { include: { author: true } } }
 	});
+
+	if (!post) notFound();
 
 	const { isAuthenticated: getIsAuthenticated } = getKindeServerSession();
 	const isAuthenticated = await getIsAuthenticated();

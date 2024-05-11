@@ -7,7 +7,7 @@ export default async function UserProfilePage({ params: { username } }: UserProf
 	const sessionUser = await getUser();
 	const user = await prisma.user.findUnique({ where: { username }, include: { posts: true } });
 
-	if (!user) return notFound();
+	if (!user) notFound();
 
 	return <UserProfile user={user} isSelf={sessionUser?.id === user.id} />;
 }
