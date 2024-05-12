@@ -7,7 +7,7 @@ import { EditProfileForm } from './EditProfileForm';
 import type { Post, User } from '@prisma/client';
 
 export function UserProfile({ user, isSelf = false }: UserProfileProps) {
-	const posts = user.posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+	const posts = (user.posts ?? []).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
 	return (
 		<article className='max-w-prose mx-auto'>
