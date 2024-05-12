@@ -8,9 +8,6 @@ import { revalidatePath } from 'next/cache';
 import type { ServerActionState } from '@/lib/types';
 
 export async function createPostAction(_prevState: ServerActionState, formData: FormData): Promise<ServerActionState> {
-	const user = await getUser();
-	if (!user) return { error: true, message: 'You must be logged in to create a new post!' };
-
 	const data = {
 		title: formData.get('title') as string,
 		image: formData.get('image') as File,
@@ -23,6 +20,10 @@ export async function createPostAction(_prevState: ServerActionState, formData: 
 	if (!data.title?.length || !data.image || !data.blurUrl || !data.width || !data.height) {
 		return { error: true, message: 'All fields are required!' };
 	}
+
+	const user = await getUser();
+	if (!user) return { error: true, message: 'You must be logged in to create a new post!' };
+	if (!user.username) return { error: true, message: 'You must set a username before creating a post!' };
 
 	const store = getStore('posts');
 	const id = generateId();
