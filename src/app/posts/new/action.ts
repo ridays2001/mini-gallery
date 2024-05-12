@@ -22,6 +22,8 @@ export async function createPostAction(_prevState: ServerActionState, formData: 
 		return { error: true, message: 'All fields are required!' };
 	}
 
+	if (data.image.size > 2 * 1024 * 1024) return { error: true, message: 'Image must not be more than 2MB!' };
+
 	const user = await getUser();
 	if (!user) return { error: true, message: 'You must be logged in to create a new post!' };
 	if (!user.username) return { error: true, message: 'You must set a username before creating a post!' };
