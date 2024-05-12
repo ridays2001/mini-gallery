@@ -28,7 +28,7 @@ export async function createPostAction(_prevState: ServerActionState, formData: 
 	const id = generateId();
 
 	// Save the image in the store.
-	await store.set(id, data.image);
+	await store.set(id, data.image, { metadata: { authorId: user.id } });
 
 	const prisma = getPrisma();
 	await prisma.post.create({
