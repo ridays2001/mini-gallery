@@ -1,6 +1,7 @@
 import { Posts } from '@/components/Posts';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PersonIcon } from '@radix-ui/react-icons';
+import { DeleteProfileForm } from './DeleteProfileForm';
 import { EditProfileForm } from './EditProfileForm';
 
 import type { Post, User } from '@prisma/client';
@@ -25,7 +26,12 @@ export function UserProfile({ user, isSelf = false }: UserProfileProps) {
 					<p>{user.username ? `@${user.username}` : 'No username set.'}</p>
 					<p className='mb-4'>{user.bio ?? 'No bio set.'}</p>
 
-					{isSelf && <EditProfileForm username={user.username} bio={user.bio} />}
+					{isSelf && (
+						<div className='flex gap-4'>
+							<EditProfileForm username={user.username} bio={user.bio} />
+							<DeleteProfileForm />
+						</div>
+					)}
 				</section>
 			</section>
 

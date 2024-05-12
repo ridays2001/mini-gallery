@@ -1,7 +1,9 @@
 'use server';
 
 import { getPrisma, getUser } from '@/lib/db';
+import { purgeCache } from '@netlify/functions';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 import type { ServerActionState } from '@/lib/types';
 
@@ -27,4 +29,24 @@ export async function setProfileAction(_prevState: ServerActionState, formData: 
 	revalidatePath('/profile');
 
 	return { success: true, message: 'Profile updated successfully!' };
+}
+
+export async function deleteProfileAction(
+	_prevState: ServerActionState,
+	_formData: FormData
+): Promise<ServerActionState> {
+	const user = await getUser();
+	if (!user) return { error: true, message: 'You must be logged in to delete your profile!' };
+
+	const prisma = getPrisma();
+	await prisma.user.delete({ where: { id: user.id } });
+
+	// Also delete the user from Kinde auth. I am skipping this step for now.
+
+	await purgeCache({
+		tags: [user.id]
+	});
+
+	revalidatePath('/');
+	redirect('/api/auth/logout');
 }
