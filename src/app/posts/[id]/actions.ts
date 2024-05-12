@@ -15,6 +15,7 @@ export async function likeAction(postId: string) {
 		data: { likes: { increment: 1 } }
 	});
 
+	// Technically, this is not required as we are using optimistic UI updates.
 	revalidatePath(`/posts/${postId}`);
 	return { success: true, message: 'Post liked!' };
 }
