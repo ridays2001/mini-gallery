@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { CommentBox, CommentButton } from './Comments';
+import { DeleteForm } from './DeleteForm';
 import { LikeButton } from './LikeButton';
 
 export default async function PostPage({ params: { id } }: PostPageProps) {
@@ -18,12 +19,16 @@ export default async function PostPage({ params: { id } }: PostPageProps) {
 
 	if (!post) notFound();
 
-	const { isAuthenticated: getIsAuthenticated } = getKindeServerSession();
-	const isAuthenticated = await getIsAuthenticated();
+	const { getUser } = getKindeServerSession();
+	const kindeUser = await getUser();
+	const isAuthenticated = !!kindeUser;
 
 	return (
 		<article className='max-w-prose mx-auto flex flex-col gap-6'>
-			<h1 className='text-center'>{post.title}</h1>
+			<div className='flex items-center'>
+				<h1 className='mx-auto'>{post.title}</h1>
+				{kindeUser?.id === post.author.id && <DeleteForm postId={post.id} />}
+			</div>
 			<Image
 				alt={post.title}
 				src={`/posts/raw/${post.id}`}
