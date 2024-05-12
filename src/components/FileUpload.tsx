@@ -13,6 +13,13 @@ export function FileUpload({ className }: FileUploadProps) {
 
 	// Prevent memory leaks. Ref: https://react-dropzone.js.org/#section-previews
 	useEffect(() => {
+		if (typeof document !== 'undefined' && file) {
+			// We cannot programmatically set the file input value, so we need to append the file to the FormData event.
+			document.querySelector('form').addEventListener('formdata', e => {
+				e?.formData?.append('image', file);
+			});
+		}
+
 		// @ts-expect-error
 		return () => file && URL.revokeObjectURL(file?.preview);
 	}, [file]);
@@ -21,7 +28,7 @@ export function FileUpload({ className }: FileUploadProps) {
 		accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'], 'image/webp': ['.webp'] },
 		maxFiles: 1,
 		maxSize: 2 * 1024 * 1024,
-		onDrop: acceptedFiles => {
+		onDropAccepted: acceptedFiles => {
 			if (!acceptedFiles.length) return null;
 			setFile(Object.assign(acceptedFiles[0], { preview: URL.createObjectURL(acceptedFiles[0]) }));
 
@@ -84,14 +91,7 @@ export function FileUpload({ className }: FileUploadProps) {
 					</label>
 				)}
 
-				<Input
-					{...getInputProps()}
-					name='image'
-					accept='image/png, image/jpeg, image/webp'
-					type='file'
-					className='hidden'
-					required
-				/>
+				<Input {...getInputProps()} accept='image/png, image/jpeg, image/webp' type='file' className='hidden' />
 
 				{/* Inject the properties as hidden inputs. */}
 				<input type='hidden' name='blurUrl' value={imageProperties?.blurUrl} />
