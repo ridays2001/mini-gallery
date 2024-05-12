@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { CommentBox, CommentButton } from './Comments';
-import { DeleteForm } from './DeleteForm';
+import { DeletePostForm } from './DeletePostForm';
 import { LikeButton } from './LikeButton';
 
 export default async function PostPage({ params: { id } }: PostPageProps) {
@@ -27,7 +27,7 @@ export default async function PostPage({ params: { id } }: PostPageProps) {
 		<article className='max-w-prose mx-auto flex flex-col gap-6'>
 			<div className='flex items-center'>
 				<h1 className='mx-auto'>{post.title}</h1>
-				{kindeUser?.id === post.author.id && <DeleteForm postId={post.id} />}
+				{kindeUser?.id === post.author.id && <DeletePostForm postId={post.id} />}
 			</div>
 			<Image
 				alt={post.title}
