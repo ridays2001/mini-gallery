@@ -92,7 +92,7 @@ export const generateMetadata = async ({ params: { id } }: PostPageProps) => {
 
 	return {
 		title: `${post.title} | Mini Gallery`,
-		metadataBase: new URL(process.env.NEXT_PUBLIC_URL),
+		metadataBase: new URL(process.env.SITE_URL),
 		openGraph: {
 			title: post.title,
 			images: [{ url: `/posts/raw/${post.id}` }]
