@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { UploadIcon } from '@radix-ui/react-icons';
 import { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { toast } from 'sonner';
 import { Input } from './ui/input';
 
 export function FileUpload({ className }: FileUploadProps) {
@@ -13,7 +14,7 @@ export function FileUpload({ className }: FileUploadProps) {
 	// Prevent memory leaks. Ref: https://react-dropzone.js.org/#section-previews
 	useEffect(() => {
 		// @ts-expect-error
-		return () => URL.revokeObjectURL(file.preview);
+		return () => file && URL.revokeObjectURL(file?.preview);
 	}, []);
 
 	const { getInputProps, getRootProps, open } = useDropzone({
@@ -55,6 +56,9 @@ export function FileUpload({ className }: FileUploadProps) {
 					0.1
 				);
 			};
+		},
+		onDropRejected: () => {
+			toast.error('Invalid file type or file size. Please upload a valid image file under 2MB.');
 		}
 	});
 
