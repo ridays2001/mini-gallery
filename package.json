@@ -15,6 +15,7 @@
 	"dependencies": {
 		"@kinde-oss/kinde-auth-nextjs": "^2.2.6",
 		"@netlify/blobs": "^7.3.0",
+		"@netlify/functions": "^2.6.3",
 		"@prisma/client": "5.13.0",
 		"@radix-ui/react-avatar": "^1.0.4",
 		"@radix-ui/react-dialog": "^1.0.5",
