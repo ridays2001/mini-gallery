@@ -32,7 +32,7 @@ export function DeleteProfileForm() {
 				</DialogHeader>
 				<FormWrapper action={deleteProfileAction}>
 					<DialogFooter>
-						<SubmitButton label='Save' pendingLabel='Saving...' />
+						<SubmitButton label='Delete' pendingLabel='Deleting...' />
 					</DialogFooter>
 				</FormWrapper>
 			</DialogContent>
