@@ -17,7 +17,9 @@ export function DeleteProfileForm() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button>Delete Profile</Button>
+				<Button variant='ghost' className='text-destructive hover:bg-destructive/35'>
+					Delete Profile
+				</Button>
 			</DialogTrigger>
 
 			<DialogContent className='w-11/12 sm:max-w-lg'>
