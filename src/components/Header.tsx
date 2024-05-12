@@ -1,7 +1,7 @@
 'use server';
 
 import { getKindeServerSession, LoginLink, LogoutLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs/server';
-import { PersonIcon } from '@radix-ui/react-icons';
+import { PersonIcon, PlusIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
@@ -14,14 +14,16 @@ export async function Header() {
 	const user = await getUser();
 
 	return (
-		<header className='flex justify-between py-4 px-8'>
-			<h1 className='text-3xl'>
+		<header className='flex justify-between py-4 px-4 md:px-8'>
+			<h1 className='text-2xl md:text-3xl'>
 				<Link href='/'>Mini Gallery</Link>
 			</h1>
 			{isLoggedIn ? (
 				<nav className='flex items-center gap-4'>
 					<Button asChild>
-						<Link href='/posts/new'>New Post</Link>
+						<Link href='/posts/new' className='flex gap-2'>
+							<PlusIcon /> <span className='hidden md:block'>New Post</span>
+						</Link>
 					</Button>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
