@@ -4,6 +4,7 @@ import { getPrisma, getUser } from '@/lib/db';
 import { generateId } from '@/lib/utils';
 import { getStore } from '@netlify/blobs';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 import type { ServerActionState } from '@/lib/types';
 
@@ -50,5 +51,5 @@ export async function createPostAction(_prevState: ServerActionState, formData: 
 	revalidatePath('/profile');
 	revalidatePath('/');
 
-	return { success: true, message: 'Post created successfully!' };
+	redirect(`/posts/${id}`);
 }
