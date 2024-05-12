@@ -15,7 +15,7 @@ export function FileUpload({ className }: FileUploadProps) {
 	useEffect(() => {
 		// @ts-expect-error
 		return () => file && URL.revokeObjectURL(file?.preview);
-	}, []);
+	}, [file]);
 
 	const { getInputProps, getRootProps, open } = useDropzone({
 		accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'], 'image/webp': ['.webp'] },
