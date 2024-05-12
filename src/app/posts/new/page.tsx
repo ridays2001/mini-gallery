@@ -8,3 +8,7 @@ export default function NewPostPage() {
 		</article>
 	);
 }
+
+export const metadata = {
+	title: 'New Post | Mini Gallery'
+};

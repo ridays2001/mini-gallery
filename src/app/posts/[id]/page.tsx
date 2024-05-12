@@ -79,6 +79,22 @@ export default async function PostPage({ params: { id } }: PostPageProps) {
 	);
 }
 
+export const generateMetadata = async ({ params: { id } }: PostPageProps) => {
+	const prisma = getPrisma();
+	const post = await prisma.post.findUnique({ where: { id } });
+
+	if (!post) return { title: 'Post Not Found | Mini Gallery' };
+
+	return {
+		title: `${post.title} | Mini Gallery`,
+		metadataBase: new URL(process.env.NEXT_PUBLIC_URL),
+		openGraph: {
+			title: post.title,
+			images: [{ url: `/posts/raw/${post.id}` }]
+		}
+	};
+};
+
 type PostPageProps = {
 	params: { id: string };
 };

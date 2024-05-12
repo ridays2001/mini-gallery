@@ -22,6 +22,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 }
 
 export const metadata: Metadata = {
-	title: 'Mini Image Gallery',
+	title: 'Mini Gallery',
 	description: 'A simple image gallery built with Next.js and Netlify dynamic functions.'
 };

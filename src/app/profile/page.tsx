@@ -6,3 +6,7 @@ export default async function ProfilePage() {
 
 	return <UserProfile user={user} isSelf />;
 }
+
+export const metadata = {
+	title: 'My Profile | Mini Gallery'
+};

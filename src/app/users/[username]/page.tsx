@@ -12,6 +12,18 @@ export default async function UserProfilePage({ params: { username } }: UserProf
 	return <UserProfile user={user} isSelf={sessionUser?.id === user.id} />;
 }
 
+export const generateMetadata = async ({ params: { username } }: UserProfilePageProps) => {
+	const prisma = getPrisma();
+	const user = await prisma.user.findUnique({ where: { username } });
+
+	if (!user) return { title: 'User Not Found | Mini Gallery' };
+
+	return {
+		title: `${user.name} | Mini Gallery`,
+		description: user.bio
+	};
+};
+
 type UserProfilePageProps = {
 	params: { username: string };
 };
